@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+TC:wght@100..900&display=swap');
+
+:root {
+    --font-family-global: "Noto Sans TC", "Noto Sans JP", Arial, sans-serif;
+    --font-family-jp: "Noto Sans JP", "Noto Sans TC", Arial, sans-serif;
+}
+
+body, input, button {
+    font-family: var(--font-family-global);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 5em 0;
+}
+
+.container {
+    padding: 0 2em;
+    max-width: 60em;
+}
+
+.searchbar {
+    position: sticky;
+    top: 0;
+    padding-bottom: 1em;
+    background-color: #fff;
+}
+
+.title-container {
+    text-align: center;
+    padding: 1em 0;
+}
+
+.title-container h1 {
+    margin: 0;
+}
+
+/* input {
+    font-family: var(--font-family-global);
+} */
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25em;
+    padding: 0.25em;
+    border: 0.125em solid #ccc;
+    border-radius: 0.25em;
+    min-height: 2em;
+    align-items: center;
+}
+
+.tag-input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    min-width: 20em;
+}
+
+.tag {
+    background-color: #007bff;
+    color: white;
+    padding: 0.25em 0.5em;
+    border-radius: 1em;
+    display: flex;
+    align-items: center;
+    margin-right: 0.25em;
+    box-sizing: border-box;
+    height: 2em;
+}
+
+.tag span {
+    margin-left: 0.25em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    padding-top: 0.5em;
+}
+
+button {
+    margin-left: auto;
+    font-size: 1em;
+    font-weight: 700;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    height: 2em;
+    padding: 0 1em;
+    border-radius: 1em;
+    cursor: pointer;
+}
+
+button#submit {
+    margin-left: 0.5em;
+}
+
+.suggestions {
+    margin-top: 0.75em;
+}
+
+.suggestion {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    margin: 0.25em;
+    background: #f0f0f0;
+    border-radius: 0.25em;
+}
+
+#suggestions-performers > .suggestion {
+    font-family: var(--font-family-jp);
+}
