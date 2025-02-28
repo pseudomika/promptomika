@@ -113,6 +113,10 @@ button#submit {
     border-radius: 0.25em;
 }
 
+.suggestion-highlight {
+    background: linear-gradient(90deg, #f2cddd, #c0d5eb);
+}
+
 #suggestions-performers > .suggestion {
     font-family: var(--font-family-jp);
 }
