@@ -145,7 +145,7 @@ button#submit {
 }
 
 .suggestion-highlight {
-    background: linear-gradient(90deg, #f2cddd, #c0d5eb);
+    background: linear-gradient(120deg, #f2cddd, #c0d5eb);
 }
 
 #suggestions-performers > .suggestion {
