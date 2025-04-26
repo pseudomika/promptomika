@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Search bar elements
     const tagsContainer = document.getElementById("tags-container");
     const tagInput = document.getElementById("tag-input");
+    const favoritesShortcut = document.getElementById("link-favorites");
+    const watchLaterShortcut = document.getElementById("link-watch-later");
     const resetButton = document.getElementById("reset");
     const submitButton = document.getElementById("submit");
     // Keyword elements
@@ -93,6 +95,15 @@ document.addEventListener("DOMContentLoaded", function () {
             if (tagText) addTag(tagText);
         }
     });
+
+    // Jable Shortcuts
+    favoritesShortcut.addEventListener("click", function () {
+        openInNewTab("https://jable.tv/my/favourites/videos/")
+    })
+
+    watchLaterShortcut.addEventListener("click", function () {
+        openInNewTab("https://jable.tv/my/favourites/videos-watch-later/")
+    })
 
     // Click reset button to remove all keywords from search bar
     resetButton.addEventListener("click", function () {

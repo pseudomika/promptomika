@@ -123,6 +123,10 @@ button {
     cursor: pointer;
 }
 
+button#link-favorites {
+    margin-right: 0.5em;
+}
+
 button#reset {
     margin-left: auto;
 }
