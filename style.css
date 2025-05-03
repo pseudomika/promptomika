@@ -34,7 +34,7 @@ body {
     background: #fff;
     box-sizing: border-box;
     padding: 0 calc(50vw - 15em);
-    display: none;
+    /* display: none; */
 }
 
 .auth-container {
