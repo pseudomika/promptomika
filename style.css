@@ -34,7 +34,7 @@ body {
     background: #fff;
     box-sizing: border-box;
     padding: 0 calc(50vw - 15em);
-    /* display: none; */
+    display: none;
 }
 
 .auth-container {
@@ -123,7 +123,7 @@ button {
     cursor: pointer;
 }
 
-button#link-favorites {
+button.button-left {
     margin-right: 0.5em;
 }
 
@@ -152,6 +152,31 @@ button#submit {
     background: linear-gradient(120deg, #f2cddd, #c0d5eb);
 }
 
-#suggestions-performers > .suggestion {
+#suggestions-performers {
     font-family: var(--font-family-jp);
+}
+
+.actor-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1em;
+    margin-bottom: 0.5em;
+}
+
+.actor {
+    display: flex;
+    padding: 1em;
+    gap: 1em;
+    border: 2px solid #007bff;
+    border-radius: 2em;
+}
+
+.actor img {
+    width: 125px;
+    border-radius: 1em;
+}
+
+.actor-names {
+    display: flex;
+    flex-direction: column;
 }

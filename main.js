@@ -1,53 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Auth elements
-    const authOverlay = document.getElementById("auth-overlay")
-    const authUsername = document.getElementById("username")
-    const authPassword = document.getElementById("password")
-    const loginButton = document.getElementById("login")
-    // Search bar elements
-    const tagsContainer = document.getElementById("tags-container");
-    const tagInput = document.getElementById("tag-input");
-    const favoritesShortcut = document.getElementById("link-favorites");
-    const watchLaterShortcut = document.getElementById("link-watch-later");
-    const resetButton = document.getElementById("reset");
-    const submitButton = document.getElementById("submit");
-    // Keyword elements
-    const suggestions = document.getElementsByClassName("suggestions")
-
-    function addTag(tagText) {
-        // Prevent duplicates
-        if ([...tagsContainer.children].some(tag => tag.textContent.includes(tagText))) return;
-
-        const tag = document.createElement("div");
-        tag.classList.add("tag");
-        tag.innerHTML = `${tagText} <span>&times;</span>`;
-
-        tag.querySelector("span").addEventListener("click", () => {
-            tag.remove();
-            restoreSuggestion(tagText);
-        });
-
-        tagsContainer.insertBefore(tag, tagInput);
-        tagInput.value = "";
-        removeSuggestion(tagText);
-    }
-
-    function removeSuggestion(tagText) {
-        for (const elem of suggestions) {
-            const suggestionItems = [...elem.children];
-            const match = suggestionItems.find(item => item.textContent === tagText);
-            if (match) match.style.display = "none";
-        }
-    }
-
-    function restoreSuggestion(tagText) {
-        for (const elem of suggestions) {
-            const suggestionItems = [...elem.children];
-            const match = suggestionItems.find(item => item.textContent === tagText);
-            if (match) match.style.display = "inline-block";
-        }
-    }
-
+    // ==== COMMON FUNCTIONS ====
     function openInNewTab(url) {
         var win = window.open(url, '_blank');
         win.focus();
@@ -59,6 +11,12 @@ document.addEventListener("DOMContentLoaded", function () {
             return a & a;
         }, 0);
     }
+
+    // ==== AUTHENTICATION ====
+    const authOverlay = document.getElementById("auth-overlay")
+    const authUsername = document.getElementById("username")
+    const authPassword = document.getElementById("password")
+    const loginButton = document.getElementById("login")
 
     function login() {
         const username = authUsername.value;
@@ -87,6 +45,70 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     })
 
+    // ==== JABLE SHORTCUTS ====
+    const shortcuts = {
+        "link-favorites": "https://jable.tv/my/favourites/videos/",
+        "link-watch-later": "https://jable.tv/my/favourites/videos-watch-later/",
+        "link-zh-subtitles": "https://jable.tv/categories/chinese-subtitle/",
+        "link-new-releases": "https://jable.tv/new-release/"
+    };
+    
+    function bindShortcut(linkId, url) {
+        const element = document.getElementById(linkId);
+        if (element) {
+            element.addEventListener("click", () => openInNewTab(url));
+        }
+    }
+    
+    // Bind all shortcuts
+    Object.entries(shortcuts).forEach(([linkId, url]) => {
+        bindShortcut(linkId, url);
+    });
+
+    // ==== SEARCH BAR ====
+    const tagsContainer = document.getElementById("tags-container");
+    const tagInput = document.getElementById("tag-input");
+    const resetButton = document.getElementById("reset");
+    const submitButton = document.getElementById("submit");
+
+    function removeSuggestion(tagText) {
+        const suggestionItems = document.getElementsByClassName("suggestion")
+        const match = [...suggestionItems].find(item => item.textContent === tagText)
+        if (match) match.style.display = "none";
+    }
+
+    function restoreSuggestion(tagText) {
+        const suggestionItems = document.getElementsByClassName("suggestion")
+        const match = [...suggestionItems].find(item => item.textContent === tagText)
+        if (match) match.style.display = "inline-block";
+    }
+
+    function addTag(tagText) {
+        // Prevent duplicates
+        if ([...tagsContainer.children].some(tag => tag.textContent.includes(tagText))) return;
+
+        const tag = document.createElement("div");
+        tag.classList.add("tag");
+        tag.innerHTML = `${tagText} <span>&times;</span>`;
+
+        tag.querySelector("span").addEventListener("click", () => {
+            tag.remove();
+            restoreSuggestion(tagText);
+        });
+
+        tagsContainer.insertBefore(tag, tagInput);
+        tagInput.value = "";
+        removeSuggestion(tagText);
+    }
+
+    // Add keyword when clicked
+    const suggestionItems = document.getElementsByClassName("suggestion")
+    for (const item of suggestionItems) {
+        item.addEventListener("click", function() {
+            addTag(item.textContent)
+        })
+    }
+
     // Manually input new tag, click space or tab to complete
     tagInput.addEventListener("keydown", function (e) {
         if (e.key === " " || e.key === "Tab") {
@@ -95,15 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
             if (tagText) addTag(tagText);
         }
     });
-
-    // Jable Shortcuts
-    favoritesShortcut.addEventListener("click", function () {
-        openInNewTab("https://jable.tv/my/favourites/videos/")
-    })
-
-    watchLaterShortcut.addEventListener("click", function () {
-        openInNewTab("https://jable.tv/my/favourites/videos-watch-later/")
-    })
 
     // Click reset button to remove all keywords from search bar
     resetButton.addEventListener("click", function () {
@@ -129,13 +142,4 @@ document.addEventListener("DOMContentLoaded", function () {
             console.warn("Search box is empty")
         }
     });
-
-    // Add keyword when clicked
-    for (const elem of suggestions) {
-        elem.addEventListener("click", function (e) {
-            if (e.target.classList.contains("suggestion")) {
-                addTag(e.target.textContent);
-            }
-        })
-    };
 });
