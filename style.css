@@ -64,10 +64,6 @@ button#login {
     margin: 0;
 }
 
-/* input {
-    font-family: var(--font-family-global);
-} */
-
 .tags-container {
     display: flex;
     flex-wrap: wrap;
@@ -158,9 +154,22 @@ button#submit {
 
 .actor-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     column-gap: 1em;
+    row-gap: 1em;
     margin-bottom: 0.5em;
+}
+
+@media(min-width: 640px) {
+    .actor-container {
+        grid-template-columns: 1fr 1fr
+    }
+}
+
+@media(min-width: 960px) {
+    .actor-container {
+        grid-template-columns: 1fr 1fr 1fr
+    }
 }
 
 .actor {
